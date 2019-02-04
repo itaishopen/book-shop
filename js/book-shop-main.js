@@ -122,6 +122,7 @@ function onReadBook(bookId) {
 function updateImg(bookId) {
     var book = getBookById(bookId);
     book.img = $('img').attr('src');
+    onCloseModal();
     renderBooks(getCurrPageIdx());
 }
 
