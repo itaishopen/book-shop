@@ -32,7 +32,7 @@ function renderShelf(books) {
         <div class="card book book-item${currCounter}">
         <img class="card-img-top" src="${book.img}" onclick="onReadBook('${book.id}')" onerror="imgSolver('${book.title}','${book.author}', 'book-item${currCounter}')">
         <div class="btn delete-btn" onclick="onDeleteBook('${book.id}')">&#10006;</div>
-            <div class = "img-info">
+            <div class = "img-info" onclick="onReadBook('${book.id}')">
                 <div class = "img-title"></div>
                 <div class = "img-Author"></div>
             </div>
@@ -110,8 +110,8 @@ function onReadBook(bookId) {
                         <a onclick="onRateChange(1, '${book.id}')">+</a>
                     </div>
                 </div>
+                <a onclick="updateImg('${book.id}')" class="btn button1" style="display: none">Update Img</a>
             </div>
-            <a onclick="updateImg('${book.id}')" class="btn button1" style="display: none">Update Img</a>
         </div>
     </div>`
     var $model = $('.pop-up');
@@ -283,9 +283,8 @@ function onFilterChange(filterByTxt) {
 }
 
 function previewFile() {
-
     var preview = document.querySelector('img');
-    var file    = document.querySelector('input[type=file]').files[0];
+    var file    = $('input[type=file]').attr('files').files[0];
     var reader  = new FileReader();
     
     reader.addEventListener("load", function () {

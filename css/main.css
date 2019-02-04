@@ -181,7 +181,8 @@ table, tr, td {
 
 .img-info {
     text-align: center;
-    margin-top: 30%;
+    height: 115px;
+    padding-top: 30%; 
 }
 
 .books-container >.pop-up {
