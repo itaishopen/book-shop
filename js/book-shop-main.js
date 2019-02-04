@@ -21,6 +21,7 @@ function renderBooks(pageIdx) {
     pageNumbersStr += `<a onclick="onNextPage()">&raquo;</a>`;
     $('.pagination').html(pageNumbersStr);
     $(`#page-${+pageIdx + 1}`).addClass('active');
+    saveToLocalStorage(BOOKS_KEY, getGBooks());
 }
 
 function renderShelf(books) {

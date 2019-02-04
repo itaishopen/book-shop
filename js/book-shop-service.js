@@ -19,7 +19,7 @@ function getGView() {
 }
 
 function createBooks() {
-    var books = loadFromLocalStorage(BOOKS_KEY)
+    var books = loadFromLocalStorage(BOOKS_KEY);
     if (!books || books.length === 0) {
         books = []
         var titles = ['Fox in Socks', 'The Cat in the Hat', 'On Beyond Zebra', 'Horton Hatches the Egg', "Dr. Seuss's ABC", 'If I Ran the Zoo', 'Marvin K. Mooney will you Please Go Now!', 'Scrambled Eggs Super!', 'The 500 Hats of Bartholomew Cubbins', 'Hunches in Bunches']
