@@ -122,7 +122,7 @@ function onReadBook(bookId) {
 function updateImg(bookId) {
     var book = getBookById(bookId);
     book.img = $('img').attr('src');
-    onCloseModal();
+    closePopup();
     renderBooks(getCurrPageIdx());
 }
 
@@ -145,10 +145,6 @@ function addRateChange(num) {
     rate += +num;
     if (rate <= 10 && rate >= 0) $('.pop-rate span').text(rate);
     else{rate -= +num;}
-}
-
-function onCloseModal() {
-    $('.modal').hide()
 }
 
 function onDeleteBook(bookId) {
@@ -194,8 +190,7 @@ function readAndAddNewBook() {
 }
 
 function addNewBook() {
-    $('.pop-up').hide();
-
+    closePopup()
     var author = $('.pop-new-author').val();
     var title = $('.pop-new-title').val();
     var price = $('.pop-new-price').val();
