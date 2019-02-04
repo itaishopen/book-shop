@@ -1,0 +1,300 @@
+body {
+    background-image: url("../pics/hardwood-material-rough-935875.jpg");
+    background-repeat: repeat;
+}
+
+header {
+    text-align: center;
+    font-size: 100px;
+    background-color: rgba(245, 245, 245, 0.5);
+}
+
+.books-container{
+    display: flex;
+    margin-top: 1vh;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.pagination:before {
+    display: inline-block;  
+    filter: blur(5px);  
+}
+  
+.pagination {
+    display: inline-block;    
+}
+  
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: rgba(245, 245, 245, 0.5);
+    transition: background-color .3s;
+    border: 1px solid #ddd; 
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.books-container .shelf{
+	width:426px;
+	height:400px;
+}
+
+.btn {
+    align-self: flex-start;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px 1px black;
+}
+
+.btn:hover {
+    animation: shakeThatBooty 0.3s linear 1;
+  }
+  
+  @keyframes shakeThatBooty {
+    33% {
+      transform: rotateZ(10deg);
+    }
+    67% {
+      transform: rotateZ(-10deg);
+    }
+    100% {
+      transform: rotateZ(10deg);
+    }
+  }
+
+.books-container .shelf .row-1,
+.books-container .shelf .row-2{
+	position:relative;
+	width:100%;
+	height:158px;
+}
+
+.books-container .shelf .row-1:after,
+.books-container .shelf .row-2:after {
+	background:url("../pics/wall-bookshelf.png");
+	background-size:100%;
+	background-repeat: no-repeat;
+	background-position:bottom left;
+	width:100%;
+	height:210px;
+	display:block;
+	content:"";
+}
+
+.books-container .shelf .loc{
+    position:absolute;
+    display: flex;
+    justify-content: space-around;
+	bottom:0;
+	width:100%;
+}
+
+.book:hover{
+	z-index:2;
+	cursor: pointer;;
+	background-color:white;
+	transform: scale3d(1.1, 1.1, 0.5);
+}
+
+.book {
+    width: 83px;
+    transition:transform 0.1s;
+	transform:translate(0, 0);
+}
+
+.card {
+    background-color: rgba(245, 245, 245, 0.5);
+    display: flex;
+    flex-direction: column;
+    height: 115px;
+    border: 1px solid black;
+    box-shadow:2px 2px 5px rgba(0,0,0,0.6);
+}
+
+.card-img-top {
+    height: 115px;
+}
+
+.delete-btn {
+    transition: all 0.5s ease;
+    position: absolute;
+    background-color: #FF9980;
+    padding: 0.5px 3px;
+    left: 0;
+    margin-left: -10px;
+    margin-top: -9px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    color: white;
+    box-shadow: -3px 1px 6px 0 rgba(0,0,0,0.1);
+}
+
+.lower {
+    position: absolute;
+    flex-direction: column;
+    width: 83px;
+    bottom: 0;
+    text-align: center;
+}
+
+.shelf-update{
+    background-color: rgba(245, 245, 245, 0.5);
+}
+
+.card-Price {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: aliceblue;
+    font-size: 10px;
+}
+
+.lower-btn {
+    display: flex;
+    width: 83px;
+    justify-content: center;
+    font-size: 13px;
+}
+
+.btn-update {
+    box-shadow: 1px 1px 1px 1px black;
+}
+
+table {
+    background-color: rgba(245, 245, 245, 0.411);
+    text-align: center;
+}
+
+table, tr, td {
+    border: 1px solid blue;
+    
+}
+
+.img-info {
+    text-align: center;
+    margin-top: 30%;
+}
+
+.books-container >.pop-up {
+    position: absolute;
+    z-index: 5;
+    min-width: 400px;
+}
+
+.large-centered {
+    background-color: whitesmoke;
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,0.1);
+}
+
+.pop-up .button {
+    padding: 0 5px;
+    background-color: #FF8566;
+    margin: 0 auto 33px;
+    cursor: pointer;
+}
+
+
+.pop-up .pop-rate {
+    display: inline-block;
+}
+
+.pop-rate .rate-change {
+    display: inline-block;
+    border: 1px solid black;
+}
+.pop-up .pop-rate .rate-change a {
+    color: black;
+    padding: 1px 3px;
+    text-align: center;
+    text-decoration: none;
+    background-color: gray;
+    transition: background-color .3s;
+    border: 1px solid black;
+    cursor: pointer; 
+}
+  
+.main-pop {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.img-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left:10px; 
+    width: 200px;
+}
+
+.info-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.small-img {
+    height: 115px;
+    width: 83px;
+}
+  
+.close-button {
+    transition: all 0.5s ease;
+    position: absolute;
+    background-color: #FF9980;
+    padding: 2px 7px;
+    left: 0;
+    margin-left: -10px;
+    margin-top: -9px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    color: white;
+    box-shadow: -3px 1px 6px 0 rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.close-button:hover {
+    background-color: tomato;
+    color: #fff;
+}
+
+h3 {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #fff;
+    background-color: #FF704D;
+}
+
+p {
+    padding: 20px 65px 10px 65px;
+    color: dimgray;
+}
+  
+
+.button1 {
+    cursor: pointer;
+    width: 70px;
+    text-align: center;
+    justify-content: center;
+    background-color: rgba(206, 205, 205, 0.7);
+    margin-top: 5px;
+    border: 1px solid black;
+}
+
+.sort {
+    cursor: pointer;
+}
+
+.active {
+    box-shadow: inset 3px 3px 4px 0px black;
+}
