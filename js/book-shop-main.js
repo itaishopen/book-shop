@@ -135,6 +135,7 @@ function onRateChange(num, bookId) {
     var rate = book.rate
     if (rate <= 10 && rate >= 0) $('.pop-rate span').text(rate);
     else{book.rate -= +num;}
+    saveToLocalStorage(BOOKS_KEY, getGBooks());
 }
 
 function addRateChange(num) {
