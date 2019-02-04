@@ -20,7 +20,8 @@ function getGView() {
 
 function createBooks() {
     var books = loadFromLocalStorage(BOOKS_KEY)
-    if (!books) {
+    if (!books || books.length === 0) {
+        books = []
         var titles = ['Fox in Socks', 'The Cat in the Hat', 'On Beyond Zebra', 'Horton Hatches the Egg', "Dr. Seuss's ABC", 'If I Ran the Zoo', 'Marvin K. Mooney will you Please Go Now!', 'Scrambled Eggs Super!', 'The 500 Hats of Bartholomew Cubbins', 'Hunches in Bunches']
         var authors = ['Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss','Dr. Seuss','Dr. Seuss','Dr. Seuss','Dr. Seuss','Dr. Seuss','Dr. Seuss']
         var imgs = ['pics/foxinsocks.jpg', 'pics/The-Cat-in-the-Hat jpg.jpg', 'pics/On-Beyond-Zebra.jpg', 'pics/Horton-Hatches-the-Egg.jpg', "pics/Dr.-Seuss's-ABC.jpg", 'pics/If-I-Ran-the-Zoo.jpg', 'pics/Marvin-K. Mooney-will-you-Please-Go-Now!.jpg', 'pics/Scrambled-Eggs-Super!.jpg', 'pics/The-500-Hats of-Bartholomew-Cubbins.jpg', 'pics/Hunches-in-Bunches.jpg']
