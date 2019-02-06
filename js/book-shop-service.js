@@ -9,7 +9,7 @@ const PAGE_SIZE = 6;
 const BOOKS_KEY = 'books';
 
 
-function getBooksForDisply(pageIdx) {
+function getBooksForDisplay(pageIdx) {
     let fromIdx = pageIdx * PAGE_SIZE;
     let books = gBooks.slice(fromIdx, fromIdx + PAGE_SIZE);
     return books.map(function (book) {

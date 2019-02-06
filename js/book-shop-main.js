@@ -33,7 +33,7 @@ function onLangSet(lang) {
 
 function renderBooks(pageIdx) {
     sortGBooks();
-    let books = getBooksForDisply(pageIdx);
+    let books = getBooksForDisplay(pageIdx);
     if (getGView() === 'shelf') renderShelf(books);
     else renderTable(books);
     let leftArrow = '&laquo;';
