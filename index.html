@@ -5,54 +5,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="pics/1495749808Books-PNG-ClipArt.ico" />
+    <link rel="shortcut icon" href="pics/1495749808Books-PNG-ClipArt.ico"/>
     <title>My Book Shop</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body onload="init()">
+<label>
+    <select class="langSelector" onchange="onLangSet(this.value)">
+        <option value="en">English</option>
+        <option value="de">Deutsche</option>
+        <option value="he" class="rtl">עברית</option>
+    </select>
+</label>
 
-    <header>Books</header>
-    <section class="books-container">
-        <div class="row pop-up" style="display: none">
-        </div>
-        <div class="upper-buttons">
-            <button class="btn view-table active" onclick="handleView('table')">table</button>
-            <button class="btn view-shelf" onclick="handleView('shelf')">shelf</button>
+<header data-trans="SITE_TITLE">Books</header>
+<section class="books-container">
+    <div class="row pop-up" style="display: none">
+    </div>
+    <div class="upper-buttons">
+        <div class="uppers">
+            <button type="button" class="btn view-table active" data-trans="TABLE" onclick="handleView('table')">table
+            </button>
+            <button type="button" class="btn view-shelf" data-trans="SHELF" onclick="handleView('shelf')">shelf</button>
             <button type="button" class="btn btn-primary" onclick="readAndAddNewBook()">+</button>
         </div>
-        <table display="none">
-            <thead>
-                <tr>
-                    <td class="sort" onclick="onFilterChange('id')">Id</td>
-                    <td class="sort" onclick="onFilterChange('title')">Title</td>
-                    <td class="sort" onclick="onFilterChange('price')">Price</td>
-                    <td colspan="3">Action</td>
-                </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-        <div class="shelf" display="none">
-            <div class="row-1">
-                <div class="loc">
-                </div>
-            </div>
-            <div class="row-2">
-                <div class="loc">
-                </div>
+        <div class="lowers">
+            <div class="order-by-selector" style="display: none">
+                <button class="btn book-id" onclick="onFilterChange('id')" data-trans="ID">Book Id</button>
+                <button class="btn book-title" onclick="onFilterChange('title')" data-trans="TITLE" value="title">Book
+                    Title
+                </button>
+                <button class="btn book-price" onclick="onFilterChange('price')" data-trans="PRICE" value="price">Book
+                    Price
+                </button>
             </div>
         </div>
-        <div class="pagination">
-        </div>
-    </section>
+    </div>
+    <table style="display: none">
+        <thead>
+        <tr>
+            <td class="sort" data-trans="ID" onclick="onFilterChange('id')">Book Id</td>
+            <td class="sort" data-trans="TITLE" onclick="onFilterChange('title')">Book Title</td>
+            <td class="sort" data-trans="PRICE" onclick="onFilterChange('price')">Book Price</td>
+            <td colspan="3" data-trans="ACTION">Action</td>
+        </tr>
+        </thead>
+        <tbody>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="js/util-service.js"></script>
-    <script src="js/book-shop-main.js"></script>
-    <script src="js/book-shop-service.js"></script>
-    <script src="js/storage-service.js"></script>
+        </tbody>
+    </table>
+    <div class="shelf" style="display: none">
+        <div class="row-1">
+            <div class="loc">
+            </div>
+        </div>
+        <div class="row-2">
+            <div class="loc">
+            </div>
+        </div>
+    </div>
+    <div class="pagination">
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="js/util-service.js"></script>
+<script src="js/i18n-service.js"></script>
+<script src="js/book-shop-service.js"></script>
+<script src="js/storage-service.js"></script>
+<script src="js/book-shop-main.js"></script>
 
 </body>
 
