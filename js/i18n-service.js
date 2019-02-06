@@ -1,5 +1,5 @@
 var gCurrLocale = 'en';
-var gTrans = {
+const gTrans = {
     en: {
         SITE_TITLE: 'Books',
         TABLE: 'table',
@@ -50,7 +50,7 @@ var gTrans = {
         SITE_TITLE: 'ספרים',
         TABLE: 'טבלה',
         SHELF: 'מדף',
-        ID: 'מס"ד',
+        ID: 'מק"ט',
         TITLE: 'שם הספר',
         PRICE: 'מחיר הספר',
         AUTHOR: 'סופר',
@@ -71,7 +71,7 @@ var gTrans = {
     }
 };
 
-var gCurrency = {
+const gCurrency = {
     en: 'USD',
     de: 'EUR',
     he: 'ILS'
@@ -85,29 +85,26 @@ function getCurrency() {
     return gCurrency[gCurrLocale];
 }
 
-function getChangeRate(price, reverse = false) {
-    if (reverse) {
-        if (gCurrLocale === 'he') return price / 3.6;
-        else if (gCurrLocale === 'de') return price / 0.9;
-    } else {
-        if (gCurrLocale === 'he') return price * 3.6;
-        else if (gCurrLocale === 'de') return price * 0.9;
-    }
-    return price;
+function getCurrLang() {
+    return gCurrLocale;
 }
 
 function setLang(lang) {
     gCurrLocale = lang;
 }
 
-function getCurrLang() {
-    return gCurrLocale;
+function getChangeRate(price, reverse = false) {
+    if (reverse) return price / exchangeRate();
+    return price * exchangeRate();
 }
 
-function getParamFromURL(name) {
-    var url = getUrl();
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
-    var results = regex.exec(url);
-    if (!results) return null;
-    return results[2];
+function exchangeRate() {
+    switch (getCurrLang()) {
+        case 'he':
+            return 3.6;
+        case 'de':
+            return 0.9;
+        case 'en':
+            return 1;
+    }
 }

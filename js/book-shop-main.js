@@ -1,25 +1,20 @@
 function init() {
     gBooks = createBooks();
-    // var langParam = getParamFromURL('lang');
-    // if (langParam) {
-    //     onLangSet(langParam);
-    //     $('.langSelector').val(langParam);
-    // }
-    var pageIdx = getCurrPageIdx();
+    let pageIdx = getCurrPageIdx();
     renderBooks(pageIdx);
     pageTranslation();
 }
 
 function pageTranslation() {
     $('[data-trans]').each(function (key, value) {
-        var tran = $(value).attr('data-trans');
+        let tran = $(value).attr('data-trans');
         $(value).text(getTrans(tran));
     });
 }
 
 function holderTranslation() {
     $('[data-trans-holder]').each(function (key, value) {
-        var tran = $(value).attr('data-trans-holder');
+        let tran = $(value).attr('data-trans-holder');
         $(value).attr("placeholder", getTrans(tran));
     });
 }
@@ -31,27 +26,24 @@ function onLangSet(lang) {
     } else {
         $('body').removeClass('rtl');
     }
-    var pageIdx = getCurrPageIdx();
+    let pageIdx = getCurrPageIdx();
     renderBooks(pageIdx);
     pageTranslation();
 }
 
 function renderBooks(pageIdx) {
     sortGBooks();
-    var books = getBooksForDisply(pageIdx);
-    if (getGView() === 'shelf') {
-        renderShelf(books);
-    } else {
-        renderTable(books);
-    }
-    var leftArrow = '&laquo;';
-    var rightArrow = '&raquo;';
+    let books = getBooksForDisply(pageIdx);
+    if (getGView() === 'shelf') renderShelf(books);
+    else renderTable(books);
+    let leftArrow = '&laquo;';
+    let rightArrow = '&raquo;';
     if ($('body').hasClass('rtl')) {
         leftArrow = '&raquo;';
         rightArrow = '&laquo;';
     }
-    var pageNumbersStr = `<a onclick="onPageChange(-1)">${leftArrow}</a>`;
-    for (var j = 0; j < getTotalPages(); j++) {
+    let pageNumbersStr = `<a onclick="onPageChange(-1)">${leftArrow}</a>`;
+    for (let j = 0; j < getTotalPages(); j++) {
         pageNumbersStr += `<a id="page-${j + 1}" onclick="selectPage(${j})">${j + 1}</a>`;
     }
     pageNumbersStr += `<a onclick="onPageChange(1)">${rightArrow}</a>`;
@@ -62,9 +54,9 @@ function renderBooks(pageIdx) {
 }
 
 function renderShelf(books) {
-    var counter = 1;
-    var strHtmls = books.map(function (book) {
-        var currCounter = counter++;
+    let counter = 1;
+    let strHtmls = books.map(function (book) {
+        let currCounter = counter++;
         return `
         <div class="card book book-item${currCounter}">
         <img class="card-img-top" src="${book.img}" onclick="onReadBook('${book.id}')" 
@@ -85,7 +77,7 @@ function renderShelf(books) {
     });
     strRow1 = '';
     strRow2 = '';
-    for (var i = 0; i < strHtmls.length; i++) {
+    for (let i = 0; i < strHtmls.length; i++) {
         if (i < 3) strRow1 += strHtmls[i];
         else strRow2 += strHtmls[i];
     }
@@ -98,7 +90,7 @@ function renderShelf(books) {
 }
 
 function renderTable(books) {
-    var strHtmls = books.map(function (book) {
+    let strHtmls = books.map(function (book) {
         return `
         <tr>
             <td>${book.id}</td>
@@ -108,13 +100,14 @@ function renderTable(books) {
                 <button class="btn btn-read" onclick="onReadBook('${book.id}')" data-trans="READ">Read</button>
             </td>
             <td>
-                <button class="btn btn-update" onclick="readAndUpdateBook('${book.id}')" data-trans="UPDATE">Update</button>
+                <button class="btn btn-update" onclick="readAndUpdateBook('${book.id}')" data-trans="UPDATE">
+                Update</button>
             </td>
             <td>
-                <button class="btn btn-delete" onclick="confirmDelete('${book.id}')" data-trans="DELETE">Delete</button>
+                <button class="btn btn-delete" onclick="confirmDelete('${book.id}')" data-trans="DELETE">
+                Delete</button>
             </td>
-        </tr>
-        `
+        </tr>`;
     });
     $('tbody').html(strHtmls.join(''));
     $('table').show();
@@ -129,9 +122,9 @@ function imgSolver(title, author, className) {
 }
 
 function onReadBook(bookId) {
-    var book = getBookById(bookId);
-    var bookPrice = transPrice(book.price);
-    var popStr = `
+    let book = getBookById(bookId);
+    let bookPrice = transPrice(book.price);
+    let popStr = `
     <div class="box small-6 large-centered">
     <a onclick="closePopup()" class="close-button">&#10006;</a>
         <h3 data-trans="BOOK_DETAILS">Book Details</h3>
@@ -152,18 +145,19 @@ function onReadBook(bookId) {
                         <a onclick="onRateChange(1, '${book.id}')">+</a>
                     </div>
                 </div>
-                <a onclick="updateImg('${book.id}')" class="btn button1" style="display: none" data-trans="UPDATE">Update</a>
+                <a onclick="updateImg('${book.id}')" class="btn button1" style="display: none" data-trans="UPDATE">
+                Update</a>
             </div>
         </div>
     </div>`;
-    var $model = $('.pop-up');
+    let $model = $('.pop-up');
     $model.html(popStr);
     pageTranslation();
     $model.show();
 }
 
 function updateImg(bookId) {
-    var book = getBookById(bookId);
+    let book = getBookById(bookId);
     book.img = $('img').attr('src');
     closePopup();
     renderBooks(getCurrPageIdx());
@@ -175,30 +169,30 @@ function onImgMissing() {
 }
 
 function onPageChange(num) {
-    var pageId = getCurrPageIdx() + num;
+    let pageId = getCurrPageIdx() + num;
     if (pageId < getTotalPages() && pageId >= 0) {
         setCurrPageIdx(pageId);
     }
 }
 
 function onRateChange(num, bookId) {
-    var book = getBookById(bookId);
-    book.rate += +num;
-    var rate = book.rate;
-    if (rate < 10 && rate >= 0) $('.rate-change span').text(rate);
-    else { book.rate -= +num; }
-    saveToLocalStorage(BOOKS_KEY, getGBooks());
+    let book = getBookById(bookId);
+    let rate = book.rate + (+num);
+    if (rate <= 10 && rate >= 0) {
+        $('.rate-change span').text(rate);
+        book.rate = rate;
+        saveToLocalStorage(BOOKS_KEY, getGBooks());
+    }
 }
 
 function addRateChange(num) {
-    var rate = +$('.rate-change span').text();
-    rate += +num;
+    let rate = (+$('.rate-change span').text()) + (+num);
     if (rate <= 10 && rate >= 0) $('.pop-rate span').text(rate);
 }
 
 function confirmDelete(bookId) {
-    var book = getBookById(bookId);
-    var popStr = `
+    let book = getBookById(bookId);
+    let popStr = `
     <div class="box small-6 large-centered">
         <a onclick="closePopup()" class="close-button">&#10006;</a>
         <h3 data-trans="BOOK_DELETE">Confirm Action</h3>
@@ -219,7 +213,7 @@ function confirmDelete(bookId) {
             </div>
         </div>
     </div>`;
-    var $model = $('.pop-up');
+    let $model = $('.pop-up');
     $model.html(popStr);
     holderTranslation();
     pageTranslation();
@@ -227,13 +221,13 @@ function confirmDelete(bookId) {
 }
 
 function onDeleteBook(bookId) {
-        deletebook(bookId);
-        var pageIdx = getCurrPageIdx();
-        renderBooks(pageIdx);
+    deleteBook(bookId);
+    let pageIdx = getCurrPageIdx();
+    renderBooks(pageIdx);
 }
 
 function readAndAddNewBook() {
-    var popStr = `
+    let popStr = `
     <div class="box small-6 large-centered">
         <a onclick="closePopup()" class="close-button">&#10006;</a>
         <h3 data-trans="BOOK_UPDATE">Book Update</h3>
@@ -262,7 +256,7 @@ function readAndAddNewBook() {
             </div>
         </div>
     </div>`;
-    var $model = $('.pop-up');
+    let $model = $('.pop-up');
     $model.html(popStr);
     holderTranslation();
     pageTranslation();
@@ -271,19 +265,18 @@ function readAndAddNewBook() {
 
 function addNewBook() {
     closePopup();
-    var author = $('.pop-new-author').val();
-    var title = $('.pop-new-title').val();
-    var price = $('.pop-new-price').val();
-    var img = $('img').attr('src');
-    var rate = +$('.rate-change span').text();
+    let author = $('.pop-new-author').val();
+    let title = $('.pop-new-title').val();
+    let price = $('.pop-new-price').val();
+    let img = $('img').attr('src');
+    let rate = +$('.rate-change span').text();
     addBook(author, title, price, img, rate);
 }
 
-
 function readAndUpdateBook(bookId) {
-    var book = getBookById(bookId);
-    var bookPrice = transPrice(book.price);
-    var popStr = `
+    let book = getBookById(bookId);
+    let bookPrice = transPrice(book.price);
+    let popStr = `
     <div class="box small-6 large-centered">
         <a onclick="closePopup()" class="close-button">&#10006;</a>
         <h3 data-trans="BOOK_UPDATE">Book Update</h3>
@@ -310,38 +303,26 @@ function readAndUpdateBook(bookId) {
             </div>
         </div>
     </div>`;
-    var $model = $('.pop-up');
+    let $model = $('.pop-up');
     $model.html(popStr);
     pageTranslation();
     $model.show();
 }
 
 function updatePrice(bookId) {
-    var $model = $('.pop-up');
+    let $model = $('.pop-up');
     $model.hide();
-    var book = getBookById(bookId);
-    var newPrice = $('.pop-new-price').val();
+    let book = getBookById(bookId);
+    let newPrice = $('.pop-new-price').val();
     book.price = newPrice;
     updateBook(bookId, newPrice);
-    var pageIdx = getCurrPageIdx();
-    renderBooks(pageIdx);
-}
-
-function onNextPage() {
-    setNextPage();
-    var pageIdx = getCurrPageIdx();
+    let pageIdx = getCurrPageIdx();
     renderBooks(pageIdx);
 }
 
 function selectPage(pageId) {
     setCurrPageIdx(pageId);
     renderBooks(pageId);
-}
-
-function onPrevPage() {
-    setPrevPage();
-    var pageIdx = getCurrPageIdx();
-    renderBooks(pageIdx);
 }
 
 function closePopup() {
@@ -352,7 +333,7 @@ function handleView(view) {
     setView(view);
     $('.view-table').toggleClass('active');
     $('.view-shelf').toggleClass('active');
-    var pageIdx = getCurrPageIdx();
+    let pageIdx = getCurrPageIdx();
     renderBooks(pageIdx);
     pageTranslation();
 }
@@ -364,20 +345,14 @@ function onFilterChange(filterByTxt) {
 }
 
 function onFileLoad() {
-    var $img = $('.small-img');
-    var $elFile = $('#image_uploads');
-    var file = $elFile[0].files[0];
-    var reader = new FileReader();
+    let $img = $('.small-img');
+    let $elFile = $('#image_uploads');
+    let file = $elFile[0].files[0];
+    let reader = new FileReader();
 
     reader.addEventListener("load", function () {
         $img.attr('src', reader.result);
     }, false);
 
-    if (file) {
-        reader.readAsDataURL(file);
-    }
-}
-
-function getUrl() {
-    return window.location.href
+    if (file) reader.readAsDataURL(file);
 }

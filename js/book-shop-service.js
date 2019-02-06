@@ -1,17 +1,17 @@
 'use strict';
 
 var gBooks;
-const PAGE_SIZE = 6;
-var currPageIdx = 0;
 var gView = 'table';
-var gSortReverse = false;
 var gSortBy = 'id';
+var gSortReverse = false;
+var currPageIdx = 0;
+const PAGE_SIZE = 6;
 const BOOKS_KEY = 'books';
 
 
 function getBooksForDisply(pageIdx) {
-    var fromIdx = pageIdx * PAGE_SIZE;
-    var books = gBooks.slice(fromIdx, fromIdx + PAGE_SIZE);
+    let fromIdx = pageIdx * PAGE_SIZE;
+    let books = gBooks.slice(fromIdx, fromIdx + PAGE_SIZE);
     return books.map(function (book) {
         return {
             id: book.id,
@@ -20,7 +20,7 @@ function getBooksForDisply(pageIdx) {
             price: transPrice(book.price),
             rate: book.rate,
             img: book.img
-        }
+        };
     });
 }
 
@@ -29,11 +29,11 @@ function getGView() {
 }
 
 function createBooks() {
-    var books = loadFromLocalStorage(BOOKS_KEY);
+    let books = loadFromLocalStorage(BOOKS_KEY);
     if (!books || books.length === 0) {
         books = [];
-        var authors = ['Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss'];
-        var titles = ['Fox in Socks', 'The Cat in the Hat', 'On Beyond Zebra', 'Horton Hatches the Egg', "Dr. Seuss's ABC", 'If I Ran the Zoo', 'Marvin K.Mooney will you Please Go Now!', 'Scrambled Eggs Super!', 'The 500 Hats of Bartholomew Cubbins', 'Hunches in Bunches'];
+        const authors = ['Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss', 'Dr. Seuss'];
+        const titles = ['Fox in Socks', 'The Cat in the Hat', 'On Beyond Zebra', 'Horton Hatches the Egg', "Dr. Seuss's ABC", 'If I Ran the Zoo', 'Marvin K.Mooney will you Please Go Now!', 'Scrambled Eggs Super!', 'The 500 Hats of Bartholomew Cubbins', 'Hunches in Bunches'];
         for (let i = 0; i < titles.length; i++) {
             books.push(createBook(authors[i], titles[i], 5 * (i + 1), `pics/${titles[i]}.jpg`, 0));
         }
@@ -52,8 +52,8 @@ function createBook(author, title, price, img = "", rate = 0) {
     }
 }
 
-function deletebook(bookId) {
-    var bookIdx = gBooks.findIndex(function (book) {
+function deleteBook(bookId) {
+    let bookIdx = gBooks.findIndex(function (book) {
         return bookId === book.id;
     });
     gBooks.splice(bookIdx, 1);
@@ -61,11 +61,11 @@ function deletebook(bookId) {
 }
 
 function addBook(author, title, price, img = "", rate = 0) {
-    var numPrice = getChangeRate(+(price.replace(/\D+/g, '')), true);
-    var book = createBook(author, title, numPrice, img, rate);
+    let numPrice = getChangeRate(+(price.replace(/\D+/g, '')), true);
+    let book = createBook(author, title, numPrice, img, rate);
     gBooks.push(book);
     saveToLocalStorage(BOOKS_KEY, gBooks);
-    var pageIdx = getCurrPageIdx();
+    let pageIdx = getCurrPageIdx();
     renderBooks(pageIdx);
 }
 
@@ -76,7 +76,7 @@ function getBookById(bookId) {
 }
 
 function updateBook(bookId, bookPrice) {
-    var bookIdx = gBooks.findIndex(function (book) {
+    let bookIdx = gBooks.findIndex(function (book) {
         return book.id === bookId;
     });
     gBooks[bookIdx].price = bookPrice;
@@ -84,7 +84,7 @@ function updateBook(bookId, bookPrice) {
 }
 
 function getGBooks() {
-    return gBooks
+    return gBooks;
 }
 
 function getCurrPageIdx() {
@@ -116,7 +116,7 @@ function orderBy(filterByTxt) {
 }
 
 function sortBooks(a, b) {
-    var num = 1;
+    let num = 1;
     if (gSortReverse) num = -1;
     if (gSortBy === 'price') {
         return (b[gSortBy] - a[gSortBy]) * num;
